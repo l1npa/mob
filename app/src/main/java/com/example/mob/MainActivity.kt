@@ -24,19 +24,16 @@ class MainActivity : AppCompatActivity() {
         }
         val input : EditText = findViewById(R.id.editText);
         val but : Button = findViewById(R.id.button);
-        val text : TextView = findViewById(R.id.textView);
         but.setOnClickListener {
-            if (input.text.isNotEmpty()) {
-                var sum: Double = 0.0;
-                val edge: Double = input.text.toString().toDouble();
-                var it: Double = 1.0;
-                while (it.pow(-2) >= edge) {
-                    sum += it.pow(-2);
-                    it += 1;
-                }
-                text.text = "Sum = $sum \n a = ${(it - 1).pow(-2)} \n cicles = ${it - 1}";
+            val inp = input.text.toString().trim();
+            if (inp == ""){
+                Toast.makeText(this,"Введите текст",Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Введите число", Toast.LENGTH_SHORT).show()
+                var counter = 0;
+                for (it in inp.toLowerCase()){
+                    if (it >= 'a' && it <= 'z') counter++;
+                }
+                Toast.makeText(this, "Латинских букв: $counter", Toast.LENGTH_SHORT).show()
             }
         }
     }
